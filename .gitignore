@@ -1,0 +1,28 @@
+*.fls
+*.pdf
+*.PDF
+*.xdv
+*.log
+*.aux
+*.fdb_latexmk
+*.dvi
+*.blg
+# LaTeX temp files
+*-SAVE-ERROR
+*.bcf
+*.run.xml
+*.bbl
+*.toc
+
+# Large and binary files
+*.mp4
+*.gz
+*.zip
+**/submitted_*.png
+**/Screenshot*.png
+*/*/*/texts/*
+.vscode
+**/local/**
+*.out
+*.txss2
+
