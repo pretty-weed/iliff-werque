@@ -1,0 +1,33 @@
+\documentclass{turabian-researchpaper} % Automatically sets 12pt font & double spacing
+
+% --- Essential Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes} % Required for biblatex-chicago
+
+% --- Chicago Citation Setup ---
+% This uses the "Notes-Bibliography" style common in Humanities
+\usepackage[notes, backend=biber]{biblatex-chicago} 
+\addbibresource{references.bib} % Your bibliography file
+
+% --- Metadata for Title Page ---
+\title{The Title of Your Essay}
+\subtitle{An Optional Subtitle}
+\author{Dandelion Good}
+\course{Course Name}
+\date{\today}
+\addbibresource{"mysteries_of_the_broken_frame.bib"} % Replace with your actual file name
+\begin{document}
+	
+	\maketitle % Generates the Chicago-style title page
+	
+	\section*{Introduction}
+	Your introduction starts here. Turabian style typically uses 1-inch margins and left-aligned text. To cite a source, use a footnote like this.\footnote{Firstname Lastname, \textit{Title of Book} (City: Publisher, Year), page.} 
+	
+	\section*{Body Paragraph}
+	The \texttt{turabian-researchpaper} class automatically indents your paragraphs by 0.5 inches. For longer quotes (over 5 lines), use the \texttt{quote} environment to create a single-spaced block quote.
+	
+	\newpage
+	\printbibliography % Generates the bibliography page
+	
+\end{document}

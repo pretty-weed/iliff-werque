@@ -1,0 +1,106 @@
+
+\usepackage{setspace}
+\usepackage{needspace}
+%
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{datetime}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage[headheight=15pt]{geometry}
+\usepackage[hidelinks, bookmarksdepth=3]{hyperref} % Enable clickable links and PDF bookmarks
+
+% Endnotes for appendix[ces?] and editor/writers notes
+\usepackage{enotez}
+
+\DeclareInstance{enotez-list}{plain}{paragraph}{}
+
+%\DeclareInstance{enotez-list}{editor}{paragraph}{%
+%    heading = \chapter*{#1} ,
+%    notes-sep = \baselineskip ,
+%    format = \normalfont ,
+%    number = \textsuperscript{#1}
+%}
+\DeclareInstance{enotez-list}{author}{paragraph}{%
+    heading = \chapter*{#1} ,
+    notes-sep = \baselineskip ,
+    format = \normalfont ,
+    number = \textsuperscript{#1}
+}
+\setenotez{split=section}
+% Create custom user macros for the different types
+%\NewDocumentCommand{\editornote}{om}{%
+%    \IfNoValueTF{#1}
+%    {\endnote[category=editor]{#2}}
+%    {\endnote[category=editor,#1]{#2}}%
+%}
+
+\NewDocumentCommand{\authornote}{om}{%
+    \IfNoValueTF{#1}
+    {\endnote[category=author]{#2}}
+    {\endnote[category=author,#1]{#2}}%
+}
+
+
+%%%%%%%%%%%%%%%%%% Formatting silliness for Fascimile stuff %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%v%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{scripture}
+\BeforeBeginEnvironment{scripture}{\begin{quote}}
+        \AfterEndEnvironment{scripture}{\end{quote}}
+
+\newcommand{\historicaldeclaration}{%
+    \begin{center}
+        % Scaling width dynamically; 0.75 for wide layouts, 0.88 for compact book layouts
+        \begin{minipage}{\ifdefined\chapter 0.88\textwidth\else 0.75\textwidth\fi}
+            \small
+            \setlength{\parindent}{0pt}
+            \setlength{\parskip}{0pt}
+            \noindent
+            \textbf{\large AS DECLARED} by unanimous consent of the \textit{Fellow Workers of the Breaking Hands}, in the 44th year of the cursed water frame.
+
+            \comment{44YWF is 1813, third year of Luddite Rebellion}
+            \par
+        \end{minipage}
+    \end{center}
+    \vspace{2.5em} % Distinct separation before the Prefactory Address header
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chicago formatting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%v%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[threshold=2,thresholdtype=lines]{csquotes}
+\usepackage[authordate, notes, cmsdate=both, backend=biber]{biblatex-chicago}
+\addbibresource{institutes.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fmtcount}
+
+% custom inline comment command
+\newcommand{\comment}[1]{}
+
+\newcommand{\edNote}[1]{
+    \endnote
+}
+
+
+
+% This might need moving to specific outputs, idk
+\pagestyle{fancy}
+\fancyhf{}
+
+% 1. Simplify the mark to just store the number/title
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+
+\let\note\footnote
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Dandelion Good}
+\title{the Institutes of the Fellow Workers of the Breaking Hands}
+\date{2026-04-06}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
