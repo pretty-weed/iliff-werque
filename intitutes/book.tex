@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Book %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt, twoside]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% headings from appearing on empty pages.
+\usepackage{emptypage}
+\usepackage{needspace}
+%
+
+\usepackage{marginfit} % Fits and scales margin elements
+\usepackage{marginfix} % Prevents overflows and handles page breaking
+
+
+%\let\oldsection\section
+%\let\oldsubsection\subsection
+%\let\oldsubsubsection\subsubsection
+%\let\oldparagraph\paragraph
+
+%\renewcommand{\section}{\clearpage \chapter}
+%\renewcommand{\subsection}{\oldsection}
+%\renewcommand{\subsubsection}{\oldsubsection}
+
+% Set the name of the chapter to "book", i.e., Book 2 instead of Chapter 2
+\renewcommand{\chaptername}{Book}
+\newcommand{\sectionname}{Chapter}
+\newcommand{\subsectionname}{Section}
+
+\input{shared-preamble}
+\usepackage{sidenotes}
+%\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.25in}
+
+\renewcommand{\mkcitation}[1]{\sidenote{#1}}
+\SetCiteCommand{\sidenote}
+
+\let\note\sidenote
+
+
+
+
+\setcounter{secnumdepth}{3}
+
+\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in}
+
+\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+\fancyhead[L]{%
+	\itshape
+	\ifnumcomp{\value{section}}{>}{0}{%
+	\chaptername\ \Roman{section}\hfill\leftmark
+	}{% 
+	cheese \\ \sectionmark 
+}
+}
+
+\fancyhead[R]{%
+	\itshape
+	\ifnumcomp{\value{section}}{>}{0}{%
+		\rightmark
+	}{%
+		\subsectionmark
+	}
+}
+
+
+
+%\setlocalecaption{english}{contents}{\hfill\Huge{WHAT CHAPTERS ARE}\hfill\newline\large{conteined in the Bookes of this Inftitution.}}
+
+\setlocalecaption{english}{contents}{%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \begin{tabular}{c}
+      \Huge\MakeUppercase{What Chapters Are} \\[0.5em]
+      \large Conteined in the Bookes of this Institution.
+    \end{tabular}%
+  }%
+}
+
+\geometry{
+	paperheight=8.5in, paperwidth=5.5in, 
+	margin=0.5in, outer=1.25in, 
+	marginparwidth=2in, marginparsep=0.2in
+}
+
+\begin{document}
+
+% 2. Push the body entries to the right by increasing their indentation
+\cftsetindents{section}{0.25in}{1in}
+\cftsetindents{subsection}{0.5in}{1in}
+\cftsetindents{subsubsection}{0.75in}{1in}
+
+\newgeometry{margin=0.25in}
+\maketitle
+\tableofcontents
+% Ensure the margin changes only apply to the pre-preamble
+\clearpage
+\restoregeometry
+
+%\input{book-title-fmts}
+
+\input{frontmatter}
+\mainmatter
+\input{body}
+\end{document}

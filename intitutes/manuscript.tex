@@ -1,0 +1,117 @@
+\documentclass[12pt,letterpaper]{turabian-researchpaper} % Automatically sets 12pt font & double spacing
+
+\usepackage{setspace}
+\doublespacing
+
+%\AddToHook{cmd/chapter/before}{\newpage}
+\input{shared-preamble}
+
+\let\oldsection\section
+\let\oldsubsection\subsection
+\let\oldsubsubsection\subsubsection
+\let\oldparagraph\paragraph
+
+\newcommand{\chapter}[1]{\oldsection{#1}}
+%\renewcommand{\section}{\oldsubsection}
+\renewcommand{\subsection}{\oldsubsubsection}
+
+\RenewDocumentCommand{\section}{s m}{%
+    \IfBooleanTF{#1}
+        { 
+
+			\oldsubsection*{#2}%
+			\addcontentsline{toc}{section}{ \protect\numberline{\thesection} #2 }%
+		}
+        { \oldsubsection{#2}%
+	}%
+}
+
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+
+\makeatletter
+	
+\usepackage{etoolbox}
+\pretocmd{\chapter}{\clearpage}{}{}
+
+\makeatother
+
+\titleformat{\subsection}[display]
+{\normalfont\large\bfseries}
+{\hfill the \Ordinalstring{subsection} Chapter \hfill }
+{1em}
+{}								% Code before title body
+[]                           	% 5. Code after title body (Optional, use [] instead of {})
+
+
+\titleformat{\subsubsection}[runin]
+{\normalfont\normalsize\bfseries} 	% Format
+{}               				% Label
+{1em}                       	% Sep
+{}								% Code before title body
+[]                           	% 5. Code after title body (Optional, use [] instead of {})
+
+
+\renewcommand{\sectionmark}[1]{\markright{Ch. \arabic{subsection} #1}}
+
+%\fancyhead[R]{%
+%	\itshape
+%	\ifnumcomp{\value{section}}{>}{0}{%
+%		Book \protect\Ordinalstring{section}:
+%		\rightmark
+%	}{%
+%		\subsectionmark
+%	}
+%}
+
+\fancyhead[L]{%
+	\itshape
+	\ifnumcomp{\value{section}}{>}{0}{%
+		Book\ \Roman{section}\hfill\leftmark
+	}{% 
+	}
+}
+\fancyhead[R]{%
+Good\\ \thepage
+}
+
+
+\fancyfoot[C]{} % Center
+
+\addtolength{\cftsecnumwidth}{10pt}
+
+% If subsections or subsubsections are also running together:
+\addtolength{\cftsubsecnumwidth}{10pt}
+\addtolength{\cftsubsubsecnumwidth}{10pt}
+
+\begin{document}
+\input{frontmatter}
+
+\RenewDocumentCommand{\section}{s m}{%
+	\ifnumcomp{\value{subsection}}{>}{0}{%
+		%\clearpage
+	} {}%
+	\oldsubsection{#2}
+}
+\pagenumbering{arabic}
+
+\titleformat{\section}[display]
+{\normalfont\Large\bfseries}	 	% 1. Format (shape/font)
+{Book \Ordinalstring{section}}                          	 	% 2. Label (empty if you want no number)
+{1em}                       	 	% 3. Sep (vertical space in 'display' mode)
+{} 	% 4. Code before title body
+[]
+
+\input{body}
+
+\titleformat{\section}[display]
+{\normalfont\Large\bfseries} 	% Format
+{}               				% Label
+{1em}                       	% Sep
+{}								% Code before title body
+[]                           	% 5. Code after title body (Optional, use [] instead of {})
+\newpage
+
+\end{document}

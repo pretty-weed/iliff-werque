@@ -1,0 +1,250 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Book %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% The emptypage package prevents page numbers and
+% headings from appearing on empty pages.
+\usepackage{emptypage}
+
+
+\usepackage[paperheight=8.5in,paperwidth=5.5in,margin=0.5in]{geometry}
+\usepackage{setspace}
+% Using \doublespacing in the preamble
+\usepackage[toctitles]{titlesec}
+\usepackage{needspace}
+%
+\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyhf{} % clear existing header/footer entries
+%\fancyhead[R]{Good \thepage}
+
+\usepackage{datetime}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chicago formatting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%v%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[threshold=2,thresholdtype=lines]{csquotes}
+\usepackage[authordate, cmsdate=both, backend=biber]{biblatex-chicago}
+\renewcommand{\mkcitation}[1]{\footnote{#1}}
+\SetCiteCommand{\footcite}
+\addbibresource{mysteries_of_the_broken_frame.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fmtcount}
+
+
+% Set the name of the chapter to "book", i.e., Book 2 instead of Chapter 2
+\renewcommand{\chaptername}{Book}
+
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}
+{\chaptername \Ordinalstring{chapter}}
+{20pt}
+{\Huge}
+
+
+\usepackage{lipsum}
+
+% custom inline comment funciton
+\newcommand{\comment}[1]{}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% 1. Simplify the mark to just store the number/title
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\makeatletter
+\fancyhead[R]{%
+	\itshape
+	\ifnum\value{chapter}>0 
+	\chaptername\ \Ordinalstring{chapter}
+	\else 
+	% This was missing a proper condition or was referencing a non-existent command
+	\chaptername 
+	\fi
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Dandelion Good}
+\title{the Institutes of the Fellow Workers of the Breaking Hands}
+\date{2026-04-06}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents
+\frontmatter
+\comment{44YWF is 1813, third year of Luddite Rebellion}
+\textit{As declared by unanimous consent of the Fellow workers of the Breaking Hands, in 44th year of the cursed water frame}
+\chapter*{Prefactory Address}
+\addcontentsline{toc}{chapter}{Foreword}
+\lipsum[1-4]
+\chapter*{Subject of the Present Work}
+\addcontentsline{toc}{chapter}{Subject of the Present Work}
+So that 
+\lipsum[3-7]
+\chapter*{Epistle to the Reader}
+\addcontentsline{toc}{chapter}{Epistle to the Reader}
+z
+\lipsum[2-6]
+\mainmatter
+
+\chapter{The Knowledge of God the Creator and the Idol of the Machine}
+\section{Of the True God of Love and the False Gods of Industry}
+\comment{The Machine is not merely a tool; it is a false god that demands the sacrifice of the human and our community, and the Imago Dei.}
+
+\comment{Biblical Strategy: Use Exodus 20:3-5 (No other gods) and Isaiah 44:9-20 (The idol maker).}
+\subsection{The Distinction between the Maker and the Made}
+We must begin with the most fundamental and critical error of our age: the confusion of the Maker with the Made.
+The industrialist, in his hubris, commits the same error and sin as the idolater when he takes the wood of the forest, and the iron of the earth, forged by sweat of brow, has from them constructed a frame, and imagines this frame to provide abundance (Isaiah 44:9-20).
+The machine is not a Maker, it is the creation of a perverse will, and its ends surely follow the hollow, catastrophic
+
+
+\section{Of the Imago Dei and the Loss of the Maker's Image}
+Before there was a Factory, there was a Hearth. Before there was enclosure, there were commons. Before there was a Frame, there was the Hand.
+
+
+
+\section{Of the False Providence of the market}
+\comment{The "Invisible Hand" of the Market is a demonic parody of Divine Providence; it promises life but delivers death, creating a "Witchery" of anxiety and competition that unravels the social fabric.}
+
+\subsection{On the violations of covenant demanded by the Machine}
+The Machine demands constant production, violating the Sabbath rhythm of rest.
+\subsection{On the Ghastly Hand and how it turns neighbor against neighbor}
+	The Market treats neighbors as competitors rather than kin, breaking the covenant of community.
+	Before we were set upon each other in the 
+\subsection{On True Providence}
+	True Providence is found in the Shared Table, not the ledger of profit.
+\comment{Scriptural Anchor: Matthew 6:25-34 (Do not worry) and Psalm 115:4-8 (Those who make idols become like them).}
+	
+
+Lest our oppressors attempt to cast our endeavors as a return to the insensibility of the beasts, let them gaze upon the fine 
+
+\comment{ Look at Schleiermacher's soliloquies reading from 4-15& 4-22}
+Though, if they do assail us with such accusations, it would be false to represent them as wholly spurious. 
+What is the so-called "insensible" beast but a fellow creature acting in full correspondence with its nature. 
+
+We must now speak of the right, true, and natural state of the human, who, when in community with their equals, results in Communion-Work.
+This chapter concerns itself first with the good, wholesome, and sacred nature of Communion-Work.
+The Pious among us have inspired us to support such assertions as we make with the Word of God as it is represented in the Bible printed in its widely distributed English form. \comment{hand-written marginalia: Getting consensus between the priests and the atheists was maddening}
+
+
+%\subsection{Of Communion-Work}
+
+%When we work together, sharing in common our joys, songs, and sorrows along with our labor and its fruits. This work binds our community together.  
+
+%\subsection{The First Mystery}
+%When the worker knows the hand that spins the thread their cloth, the worker knows the past.
+%When the worker knows the neighbor who trades them food for cloth, the worker knows the present.
+%When the worker knows the child who wears clothes of that cloth, the worker knows the future.
+
+\chapter{The Knowledge of God the Redeemer in the Breaking of the Frame}
+\comment{christ throwing tables was a type for the breaking of the frame. he said those who came would do even greater works than he}
+
+
+\section{Of the Great Enclosure: the Garden Lost and the Fruit Stolen}
+
+The current state of our toiling kind is not a novel creation upon this world, but a re-enactment of the Fall.
+As Adam was cast out of the Garden and forbidden from the Tree of Life\footnote{Gen. 3:23}, the worker has been cast out of the commons into the factory, and forbidden from the Fruit of their Hand by the Great Enclosure and the lies of the Frame.
+Before the Factory, the land and the workshop were open to all, like Eden.
+The worker walked where they pleased, and the fruit of their labor was theirs to keep or give as they saw fit.
+
+With the Serpent as a type of the Masters
+
+
+The machine is not the first idol that has tempted those who follow a good and righteous path from their way
+
+\section[Exile in the Factory]{Exile in the Factory and the reduction of work to Toil}
+\begin{comment}
+	I want to start to loop in my work on toil reduction here
+\end{comment}
+Let our detractors not say that 
+
+
+
+\section[The Desolation of the Village]{The Desolation of the Village}
+
+For generations of generations, our ancestors kept the hearths warm, dwelling and working in common peace, with common purse.
+
+We have forgotten the Old Paths, as they have been rent by the new paved roads. We were not the only one who trod the Old Paths, our feet shared them with those of the badger, fox, and deer.
+
+Much as the cheap fabric that the frame spits out tears and ravels when caught by the slightest splinter, the communities 
+
+\subsection{rebuttal to many arguments for the advancement of the individual}
+
+The priests of Mammon\footnote{while originating as a generic term for wealth, Christian commentators had identified Mammon as a demon as early as the fourth century} demonstrate fully that they know how their extraction ravages our villages, towns, and hamlets. What faith can we put in any claim made by  
+\begin{comment}
+	use some sort of metaphor from the production chain of cloth to talk about staging goods or preparing the soil etc etc.
+\end{comment}
+.
+
+\subsection{Evidence attesting to the many and various deprivations caused by the Adversary}
+
+We shall get to them soon...
+
+\section[Of the Adversary]{Of The Adversary, and the enthrallment of the worker}
+\subsection{The Unity of the Maleficent Essence in Three Persons revealed, in truth, by their works on this world}
+
+The Industrialist
+The Priest
+The King
+
+Much has been muttered about how deftly the inter-workings of the % TODO FIND WORD
+weave together to form a garrote around the neck of us, fellow people of the hand.
+Not simply those who toil at labor for wages, but those who are deprived of our
+company and our care, our families who count us absent, and our villages, where we
+are remembered more often than seen. 
+
+How might we explain this 
+
+The 
+
+One thing that aught drive the fellows forth is how the triune adversary works
+
+
+\subsection{The Second Mystery}
+The machine that breaks the community breaks the soul.
+
+\chapter{The Way in Which We Receive the Grace of the Hand}
+\section{}
+\subsection{The Third Mystery}
+We know that food purchased with the wages of Factory toil provide no nourishment for the hands that 
+
+\chapter[Book Fourth]{Book Fourth: Of the resurrection of the Hand, and the coming commons}
+As the frame breaks more than it may ever create, and more fundamentally, the time of the hand shall come once again. 
+\subsection{ The Fourth Mystery }
+\chapter{ The External Means of Liberation }
+\section{The Shared Table}
+The table we share 
+\section{The Sabbath Rest}
+Just as all fields must lie fallow or fall to waste, just as the seasons turning 
+\section{The Silent Strike}
+
+\subsection{}
+\chapter[Book Fifth]{Book Fifth: Of our Order}
+Our order protects these secrets and 
+\section{ The committed Labors of the Fellows }
+Upon entering our mysteries, a fellow 
+
+\subsection{On the handling and care of Tools}
+
+\subsection{title}
+\chapter[Book Sixth]{Book Sixth: Of the Secrets }
+
+\subsection{The Sixth and Final Mystery}
+the lamb is the sheep 
+the sheep is the wool 
+the wool is the thread 
+the thread is the cloth 
+the cloth is the dress 
+the dress is the warmth
+the warmth is the child 
+the child is the fellow
+
+ There is no mystery truly held to the Fellowship, it is all apparent in that which is.
+ 
+\end{document}
