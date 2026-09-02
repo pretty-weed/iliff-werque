@@ -6,6 +6,8 @@
 %\AddToHook{cmd/chapter/before}{\newpage}
 \input{shared-preamble}
 
+\let\note\footnote
+
 \let\oldsection\section
 \let\oldsubsection\subsection
 \let\oldsubsubsection\subsubsection
@@ -89,6 +91,11 @@ Good\\ \thepage
 \begin{document}
 \input{frontmatter}
 
+\pagenumbering{roman}
+\maketitle
+\tableofcontents
+
+\newpage
 \RenewDocumentCommand{\section}{s m}{%
 	\ifnumcomp{\value{subsection}}{>}{0}{%
 		%\clearpage
