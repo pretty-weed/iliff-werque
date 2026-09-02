@@ -10,30 +10,25 @@
 \usepackage{marginfit} % Fits and scales margin elements
 \usepackage{marginfix} % Prevents overflows and handles page breaking
 
-
-%\let\oldsection\section
-%\let\oldsubsection\subsection
-%\let\oldsubsubsection\subsubsection
-%\let\oldparagraph\paragraph
-
-%\renewcommand{\section}{\clearpage \chapter}
-%\renewcommand{\subsection}{\oldsection}
-%\renewcommand{\subsubsection}{\oldsubsection}
-
 % Set the name of the chapter to "book", i.e., Book 2 instead of Chapter 2
 \renewcommand{\chaptername}{Book}
 \newcommand{\sectionname}{Chapter}
 \newcommand{\subsectionname}{Section}
 
-\input{shared-preamble}
-\usepackage{sidenotes}
-%\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.25in}
 
-\renewcommand{\mkcitation}[1]{\sidenote{#1}}
-\SetCiteCommand{\sidenote}
+\input{shared-preamble}
+\usepackage{marginnote}
+\usepackage{ragged2e}
+\renewcommand*{\marginnotevadjust}{0pt}
+\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.5in, marginparwidth=1.15in, marginparsep=0.1in}
+
+\SetCiteCommand{\marginnote}
+
+\newcommand{\sidenote}[1]{\marginnote{\normalfont\footnotesize #1 }}
 
 \let\note\sidenote
 
+%\newcommand{\subsubsection}[1]{\marginnote{\normalfont\footnotesize\textit #1}}
 
 
 
@@ -45,7 +40,7 @@
 \fancyhead[L]{%
 	\itshape
 	\ifnumcomp{\value{section}}{>}{0}{%
-	\chaptername\ \Roman{section}\hfill\leftmark
+	\chaptername\ \Roman{section} %\hfill\leftmark
 	}{% 
 	cheese \\ \sectionmark 
 }
@@ -54,7 +49,7 @@
 \fancyhead[R]{%
 	\itshape
 	\ifnumcomp{\value{section}}{>}{0}{%
-		\rightmark
+		merp % \rightmark
 	}{%
 		\subsectionmark
 	}
@@ -74,11 +69,8 @@
   }%
 }
 
-\geometry{
-	paperheight=8.5in, paperwidth=5.5in, 
-	margin=0.5in, outer=1.25in, 
-	marginparwidth=2in, marginparsep=0.2in
-}
+
+\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.5in, marginparwidth=1.15in, marginparsep=0.1in}
 
 \begin{document}
 
@@ -94,9 +86,12 @@
 \clearpage
 \restoregeometry
 
-%\input{book-title-fmts}
+\input{book-title-fmts}
 
 \input{frontmatter}
+
+\pagenumbering{roman}
+\newpage
 \mainmatter
 \input{body}
 \end{document}

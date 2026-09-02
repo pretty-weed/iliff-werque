@@ -1,3 +1,4 @@
+% !TeX root = book.tex
 \titleformat{name=\chapter,numberless}[display]
 {\normalfont\huge\bfseries}
 {}
@@ -24,90 +25,52 @@
 {1em}                       	 	% 3. Sep (vertical space in 'display' mode)
 {} 	% 4. Code before title body
 
-
+\newcommand{\marginheading}[1]{%
+	\marginnote{\normalfont\itshape #1}[-4.75ex]%
+}
 
 \titleformat{\subsection}[runin]
-{\itshape\normalsize}	 	% 1. Format (shape/font)
-{\arabic{subsection}}
-{1em}
-{\sidenote} 	% 4. Code before title body
+{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
+{\thesubsection}       % Position the number as the inline run-in anchor
+{0.5em}                % Space between the number and the start of paragraph text
+{\marginheading}
 
-\titleformat{\subsection}[runin]
-{\itshape\normalsize}	 	% 1. Format (shape/font)
-{\arabic{subsection}}
-{1em}
-{\sidenote\} 	% 4. Code before title body
+% 3. Adjust the vertical spacing around your new subsection entries
+\titlespacing*{\subsection}
+{0pt}                         % Indent before the number
+{3.25ex plus 1ex minus .2ex}  % Space before the paragraph starts
+{0.5em}  
 
+\titleformat{\paragraph}[runin]
+{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
+{Lib \roman{chapter}:Cap \arabic{section} \arabic{subsection}.\arabic{paragraph}}       % Position the number as the inline run-in anchor
+{0.5em}                % Space between the number and the start of paragraph text
+{\marginheading}
 
+% 3. Adjust the vertical spacing around your new subsection entries
+\titlespacing*{\paragraph}
+{0pt}                         % Indent before the number
+{3.25ex plus 1ex minus .2ex}  % Space before the paragraph starts
+{0.5em}  
 
-%\titleformat{\subsection}[display]
-%{\normalfont\Large\bfseries}	 	% 1. Format (shape/font)
-%{}                          	 	% 2. Label (empty if you want no number)
-%{1em}                       	 	% 3. Sep (vertical space in 'display' mode)
-%{} 	% 4. Code before title body
+\titleformat{\subsubsection}[runin]
+{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
+{{L\textsuperscript{ib}\Roman{chapter} C\textsuperscript{ap} \arabic{section} \S\arabic{subsection}.\arabic{subsubsection}}    }       % Position the number as the inline run-in anchor
+{0.5em}                % Space between the number and the start of paragraph text
+{\marginheading}
 
-\ExplSyntaxOn
-% Allocate internal token storage strings
-\tl_new:N \g_saved_subsec_title_tl
+% 3. Adjust the vertical spacing around your new subsection entries
+\titlespacing*{\subsubsection}
+{0pt}                         % Indent before the number
+{3.25ex plus 1ex minus .2ex}  % Space before the paragraph starts
+{0.5em}  
 
+% Section: Needs space for title + padding + 8 lines
+\newcommand{\sectionbreak}{\needspace{15\baselineskip}}
 
-% Allocate internal token storage strings
-\tl_new:N \gSavedSubsecLongTl
-\tl_new:N \gSavedSubsecShortTl
+% Subsection: Needs space for title + padding + 8 lines
+\newcommand{\subsectionbreak}{\needspace{12\baselineskip}}
 
-% 1. Redefine \subsection to accept \subsection[Short]{Long}
-\let\origsubsection\subsection
-\RenewDocumentCommand{\subsection}{ o m }{
-	\tl_gset:Nn \gSavedSubsecLongTl {#2}
-	\IfValueTF{#1}
-	{ \tl_gset:Nn \gSavedSubsecShortTl {#1} }
-	{ \tl_gset:Nn \gSavedSubsecShortTl {#2} }
+% Subsection: Needs space for title + padding + 8 lines
+\newcommand{\paragraphbreak}{\needspace{12\baselineskip}}
 
-	\peek_meaning_ignore_spaces:NTF \subsubsection
-	{ \catSkipToSubsub:w }
-	{
-		\IfValueTF{#1}
-		{ \origsubsection[#1]{#2} }
-		{ \origsubsection{#2} }
-	}
-}
-
-% Cleanly consume the \subsubsection token
-\cs_new:Npn \catSkipToSubsub:w \subsubsection #1 {
-	\catParseSubsub:w #1
-}
-
-% Helper to check for subsubsection optional argument
-\NewDocumentCommand{\catParseSubsub}{ o m }{
-	\IfValueTF{#1}
-	{ \catExecuteMerge:nnnn {\gSavedSubsecShortTl} {\gSavedSubsecLongTl} {#1} {#2} }
-	{ \catExecuteMerge:nnnn {\gSavedSubsecShortTl} {\gSavedSubsecLongTl} {#2} {#2} }
-}
-
-% Process counters, ToC entries, and push heading to the margin
-% #1 = Subsec Short, #2 = Subsec Long, #3 = Subsub Short, #4 = Subsub Long
-\cs_new:Npn \catExecuteMerge:nnnn #1 #2 #3 #4 {
-\refstepcounter{subsection}
-\refstepcounter{subsubsection}
-
-% Track cleanly in the Table of Contents
-\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}
-\addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#3}
-
-% 1. Place the reference anchor mark in the restricted heading zone
-\sidenotemark
-
-% 2. Safely defer the text placement until LaTeX drops back to outer paragraph mode
-\bgroup
-\toks0={
-\sidenotetext{
-	\raggedleft
-	\normalfont\itshape\bfseries\small
-	\thesubsubsection \quad #2 \\ \vspace{0.2ex} \rule{1cm}{0.4pt} \\ \vspace{0.2ex} #4
-}
-}
-\expandafter\egroup\the\toks0
-
-\ignorespaces
-}
-\ExplSyntaxOff
