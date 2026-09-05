@@ -5,15 +5,30 @@
 \usepackage{fancyhdr}
 \usepackage{lipsum}
 \usepackage{datetime}
+
 \usepackage{titlesec}
 \usepackage{tocloft}
-\usepackage[headheight=15pt]{geometry}
+\usepackage[abspath]{currfile}
 \usepackage[hidelinks, bookmarksdepth=3]{hyperref} % Enable clickable links and PDF bookmarks
+\usepackage{bookmark} % Always load this immediately AFTER hyperref
+
+% Handwritten notes
+\usepackage{fontspec}
+\usepackage{lcg}
+\usepackage{environ}
+\usepackage{graphicx}
+\graphicspath{{../img/}}
+% Choose a handwritten font installed on your system (like Comic Sans, Bradley Hand, or Chalkboard)
+%\newfontfamily{\handwrittentext}{saucy-jack}[
+%Path = \currfileabsdir../fonts/,                 % Looks for the file in your project folder
+%Extension = .ttf,
+%UprightFont = *            % Matches the lowercase name exactly
+%]
 
 % Endnotes for appendix[ces?] and editor/writers notes
-\usepackage{enotez}
+%\usepackage{enotez}
 
-\DeclareInstance{enotez-list}{plain}{paragraph}{}
+%\DeclareInstance{enotez-list}{plain}{paragraph}{}
 
 %\DeclareInstance{enotez-list}{editor}{paragraph}{%
 %    heading = \chapter*{#1} ,
@@ -21,13 +36,13 @@
 %    format = \normalfont ,
 %    number = \textsuperscript{#1}
 %}
-\DeclareInstance{enotez-list}{author}{paragraph}{%
-    heading = \chapter*{#1} ,
-    notes-sep = \baselineskip ,
-    format = \normalfont ,
-    number = \textsuperscript{#1}
-}
-\setenotez{split=section}
+%\DeclareInstance{enotez-list}{author}{paragraph}{%
+%    heading = \chapter*{#1} ,
+%    notes-sep = \baselineskip ,
+%    format = \normalfont ,
+%    number = \textsuperscript{#1}
+%}
+%\setenotez{split=section}
 % Create custom user macros for the different types
 %\NewDocumentCommand{\editornote}{om}{%
 %    \IfNoValueTF{#1}
@@ -35,11 +50,12 @@
 %    {\endnote[category=editor,#1]{#2}}%
 %}
 
-\NewDocumentCommand{\authornote}{om}{%
-    \IfNoValueTF{#1}
-    {\endnote[category=author]{#2}}
-    {\endnote[category=author,#1]{#2}}%
-}
+%\NewDocumentCommand{\authornote}{om}{%
+%    \IfNoValueTF{#1}
+%    {\endnote[category=author]{#2}}
+%    {\endnote[category=author,#1]{#2}}%
+%}
+
 
 
 %%%%%%%%%%%%%%%%%% Formatting silliness for Fascimile stuff %%%%%%%%%%%%%%%%%%%%
@@ -92,7 +108,7 @@
 % This might need moving to specific outputs, idk
 \pagestyle{fancy}
 \fancyhf{}
-
+\fancyfoot[C]{\thepage}
 % 1. Simplify the mark to just store the number/title
 %\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 

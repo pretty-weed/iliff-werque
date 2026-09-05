@@ -26,3 +26,8 @@
 *.out
 *.txss2
 
+*.?end
+*.[0-9]
+*.flat
+*.ent
+*.eledsec1
