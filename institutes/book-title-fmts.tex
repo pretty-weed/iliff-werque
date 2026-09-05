@@ -1,4 +1,5 @@
-% !TeX root = book.tex
+
+
 \titleformat{name=\chapter,numberless}[display]
 {\normalfont\huge\bfseries}
 {}
@@ -29,23 +30,32 @@
 	\marginnote{\normalfont\itshape #1}[-4.75ex]%
 }
 
-\titleformat{\subsection}[runin]
-{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
-{\thesubsection}       % Position the number as the inline run-in anchor
-{0.5em}                % Space between the number and the start of paragraph text
-{\marginheading}
+%\titleformat{\subsection}[runin]
+%{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
+%{\thesubsection}       % Position the number as the inline run-in anchor
+%{0.5em}                % Space between the number and the start of paragraph text
+%{\marginheading}
+% Dynamic outside margin layout for subsections
 
+% Set the font to be small, bold, and italicized
+\renewcommand*{\marginfont}{\normalfont\small\bfseries\itshape}
+
+% Keep this command the same to handle the outside margins safely
+\RenewDocumentCommand{\subsection}{s m}{%
+	\leavevmode%
+	\marginnote{#2}%
+}
 % 3. Adjust the vertical spacing around your new subsection entries
 \titlespacing*{\subsection}
 {0pt}                         % Indent before the number
 {3.25ex plus 1ex minus .2ex}  % Space before the paragraph starts
 {0.5em}  
 
-\titleformat{\paragraph}[runin]
-{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
-{Lib \roman{chapter}:Cap \arabic{section} \arabic{subsection}.\arabic{paragraph}}       % Position the number as the inline run-in anchor
-{0.5em}                % Space between the number and the start of paragraph text
-{\marginheading}
+%\titleformat{\paragraph}[runin]
+%{\normalfont\bfseries} % Format for the inline number (e.g., Bold)
+%{Lib \roman{chapter}:Cap \arabic{section} \arabic{subsection}.\arabic{paragraph}}       % Position the number as the inline run-in anchor
+%{0.5em}                % Space between the number and the start of paragraph text
+%{\marginheading}
 
 % 3. Adjust the vertical spacing around your new subsection entries
 \titlespacing*{\paragraph}
@@ -53,11 +63,11 @@
 {3.25ex plus 1ex minus .2ex}  % Space before the paragraph starts
 {0.5em}  
 
-\titleformat{\subsubsection}[runin]
+\titleformat{\subsubsection}[leftmargin]
 {\normalfont\bfseries} % Format for the inline number (e.g., Bold)
 {{L\textsuperscript{ib}\Roman{chapter} C\textsuperscript{ap} \arabic{section} \S\arabic{subsection}.\arabic{subsubsection}}    }       % Position the number as the inline run-in anchor
 {0.5em}                % Space between the number and the start of paragraph text
-{\marginheading}
+{}
 
 % 3. Adjust the vertical spacing around your new subsection entries
 \titlespacing*{\subsubsection}

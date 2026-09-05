@@ -1,11 +1,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Book %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[10pt, twoside]{book}
+\documentclass[10pt, twoside, openright]{book}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\usepackage[series={A,B,C,D},noeledsec,nofamiliar,noledgroup]{reledmac}
+\Xarrangement[B]{twocol}
+\Xarrangement[C]{threecol}
+\Xarrangement[D]{paragraph}
+\linenummargin{outer}
+\setlength{\ledlsnotewidth}{0.5\marginparwidth}
+\sidenotemargin{outer}% or {right}, whichever is your outer side per spread
+\rightnoteupfalse
+\leftnoteupfalse
+
+
+\makeatletter
+% Hide the actual line number printed in the margin
+\renewcommand{\linenumrep}[1]{}
+
+%\gdef\linenumberlist{1366669}
+\usepackage{marginnote}
+\usepackage{adjustbox}
 % headings from appearing on empty pages.
 \usepackage{emptypage}
 \usepackage{needspace}
 %
+\usepackage{scrextend}
 
 \usepackage{marginfit} % Fits and scales margin elements
 \usepackage{marginfix} % Prevents overflows and handles page breaking
@@ -13,49 +33,58 @@
 % Set the name of the chapter to "book", i.e., Book 2 instead of Chapter 2
 \renewcommand{\chaptername}{Book}
 \newcommand{\sectionname}{Chapter}
-\newcommand{\subsectionname}{Section}
+\newcommand{\subsectionname}{Sectionz}
 
 
 \input{shared-preamble}
 \usepackage{marginnote}
 \usepackage{ragged2e}
 \renewcommand*{\marginnotevadjust}{0pt}
-\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.5in, marginparwidth=1.15in, marginparsep=0.1in}
-
+%\renewcommand{\sectionmark}{\sectionname \thesection}
+\renewcommand{\sectionmark}[1]{\markright{\sectionname~\thesection\ ---\ #1}}
+%\renewcommand{\chaptermark}{\chaptername \Roman{section}}
+\usepackage[paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.5in, marginparwidth=1.15in, marginparsep=0.1in, headheight=16pt]{geometry}
 \SetCiteCommand{\marginnote}
+\newcommand{\sidenote}[1]{\ledsidenote{\parbox{\marginparwidth}{\RaggedRight\normalfont\footnotesize #1}}}
 
-\newcommand{\sidenote}[1]{\marginnote{\normalfont\footnotesize #1 }}
-
-\let\note\sidenote
-
+\setlength{\ledlsnotewidth}{0.9\marginparwidth}
+\setlength{\ledrsnotewidth}{0.9\marginparwidth}
 %\newcommand{\subsubsection}[1]{\marginnote{\normalfont\footnotesize\textit #1}}
 
-
+% for critiocal comments on text
+\newcounter{marginnotecount}
+% This line forces the counter to print as a symbol (*, †, ‡) instead of a number
+\newcommand{\themarginsymbol}{\fnsymbol{marginnotecount}}
 
 \setcounter{secnumdepth}{3}
 
-\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in}
-
 \renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+
 \fancyhead[L]{%
+	\if@mainmatter
 	\itshape
-	\ifnumcomp{\value{section}}{>}{0}{%
-	\chaptername\ \Roman{section} %\hfill\leftmark
-	}{% 
-	cheese \\ \sectionmark 
+	\sectionname \Roman{section} %\hfill\leftmark
+	\fi
+	
 }
-}
+
 
 \fancyhead[R]{%
+	\if@mainmatter
 	\itshape
-	\ifnumcomp{\value{section}}{>}{0}{%
-		merp % \rightmark
-	}{%
-		\subsectionmark
-	}
+	\thesection
+	\fi
 }
 
 
+
+
+\NewDocumentCommand{\critNote}{m}{
+\stepcounter{marginnotecount}%
+\themarginsymbol
+\Afootnote{[\themarginsymbol] #1}%
+
+}
 
 %\setlocalecaption{english}{contents}{\hfill\Huge{WHAT CHAPTERS ARE}\hfill\newline\large{conteined in the Bookes of this Inftitution.}}
 
@@ -70,28 +99,34 @@
 }
 
 
-\geometry{paperheight=8.5in, paperwidth=5.5in, margin=0.5in, outer=1.5in, marginparwidth=1.15in, marginparsep=0.1in}
 
 \begin{document}
-
+%\numberlinefalse
 % 2. Push the body entries to the right by increasing their indentation
 \cftsetindents{section}{0.25in}{1in}
 \cftsetindents{subsection}{0.5in}{1in}
 \cftsetindents{subsubsection}{0.75in}{1in}
 
+\clearpage
 \newgeometry{margin=0.25in}
 \maketitle
+\newpage
+\newgeometry{
+textheight=6.5in,
+voffset=0.5in,
+footskip=1in,
+includefoot}
 \tableofcontents
 % Ensure the margin changes only apply to the pre-preamble
-\clearpage
+%\clearpage
 \restoregeometry
-
+\cleardoublepage
+\beginnumbering
 \input{book-title-fmts}
 
-\input{frontmatter}
-
 \pagenumbering{roman}
-\newpage
+\input{frontmatter}
 \mainmatter
 \input{body}
+\endnumbering
 \end{document}
