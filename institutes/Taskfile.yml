@@ -1,3 +1,11 @@
 version: "3"
+vars:
+  OUTFILE: flatfile.tex.flat
 tasks:
-  build-book:
+  flat-file:
+    cmds:
+      - |
+        for f in $(find . -name '*.tex' -o -name '*.sty' -o -name '*.cls'); do
+        echo "===== FILE: $f =====" | tee -a {{ .OUTFILE }}
+        cat "$f" | tee -a {{ .OUTFILE }}
+        done
