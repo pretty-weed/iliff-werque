@@ -31,3 +31,5 @@
 *.flat
 *.ent
 *.eledsec1
+*.flat.tex
+repo.tree.txt
