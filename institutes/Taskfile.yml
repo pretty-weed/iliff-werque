@@ -1,11 +1,31 @@
 version: "3"
 vars:
-  OUTFILE: flatfile.tex.flat
+  FLAT_OUTFILE: flatfile.flat.tex
+  TREE_OUTFILE: repo.tree.txt
 tasks:
+  clean:
+    run: once
+    cmds:
+      - rm -f {{ .FLAT_OUTFILE }} {{ .TREE_OUTFILE }}
   flat-file:
+    deps:
+      - clean
     cmds:
       - |
         for f in $(find . -name '*.tex' -o -name '*.sty' -o -name '*.cls'); do
-        echo "===== FILE: $f =====" | tee -a {{ .OUTFILE }}
-        cat "$f" | tee -a {{ .OUTFILE }}
+        echo "===== FILE: $f =====" | tee -a {{ .FLAT_OUTFILE }}
+        cat "$f" | tee -a {{ .FLAT_OUTFILE }}
         done
+  tree:
+    deps:
+      - clean
+    cmds:
+      - tree --gitignore | tee {{ .TREE_OUTFILE }}
+  
+  analysis-export:
+    deps:
+      - clean
+    aliases: ["AE"]
+    cmds:
+      - task: flat-file
+      - task: tree
